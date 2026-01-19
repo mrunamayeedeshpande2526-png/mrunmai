@@ -2,103 +2,133 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Resume</title>
+    <title>Interactive Resume</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: #f4f4f4;
             margin: 0;
             padding: 0;
+            transition: 0.3s;
         }
 
-        .resume {
+        .container {
             width: 800px;
             margin: 20px auto;
-            background: #ffffff;
+            background: white;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
 
-        h1 {
-            text-align: center;
+        h1, h2 {
             color: #333;
         }
 
-        h2 {
-            color: #444;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
-        }
-
-        p {
-            line-height: 1.6;
+        .toggle-btn {
+            float: right;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            background: #333;
+            color: white;
+            border-radius: 5px;
         }
 
         .section {
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
-        ul {
-            list-style-type: square;
-            padding-left: 20px;
+        .skill {
+            margin: 10px 0;
         }
 
-        .contact {
-            text-align: center;
-            color: #555;
+        .skill-bar {
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 20px;
+            background: #4CAF50;
+            width: 0;
+            transition: 1s;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Dark Mode */
+        body.dark {
+            background: #121212;
+        }
+
+        body.dark .container {
+            background: #1e1e1e;
+            color: white;
+        }
+
+        body.dark h1, 
+        body.dark h2 {
+            color: #90caf9;
         }
     </style>
 </head>
 <body>
 
-<div class="resume">
-    <h1>Mrunmayee Deshpande</h1>
-    <p class="contact">
-        Email: john@example.com | Phone: 9876543210 | City: New Delhi
-    </p>
+<div class="container">
+    <button class="toggle-btn" onclick="toggleTheme()">Dark Mode</button>
+
+    <h1>John Doe</h1>
+    <p>Email: john@example.com | Phone: 9876543210</p>
 
     <div class="section">
         <h2>Career Objective</h2>
         <p>
-            To obtain a challenging position where I can utilize my skills
-            and grow professionally.
+            Passionate web developer looking for opportunities to grow and
+            contribute to innovative projects.
         </p>
-    </div>
-
-    <div class="section">
-        <h2>Education</h2>
-        <ul>
-            <li>Bachelor of Electronics & Tele communication  – Terna University (2026)</li>
-            <li>Diploma – ABC School (2021)</li>
-        </ul>
     </div>
 
     <div class="section">
         <h2>Skills</h2>
-        <ul>
-            <li>HTML, CSS, JavaScript</li>
-            <li>C, C++, Java</li>
-            <li>MS Office</li>
-        </ul>
+
+        <div class="skill">
+            HTML
+            <div class="skill-bar">
+                <div class="skill-level" style="width:90%"></div>
+            </div>
+        </div>
+
+        <div class="skill">
+            CSS
+            <div class="skill-bar">
+                <div class="skill-level" style="width:80%"></div>
+            </div>
+        </div>
+
+        <div class="skill">
+            JavaScript
+            <div class="skill-bar">
+                <div class="skill-level" style="width:70%"></div>
+            </div>
+        </div>
     </div>
 
     <div class="section">
         <h2>Projects</h2>
-        <ul>
-            <li>Online Resume Website</li>
-            <li>Student Management System</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Personal Details</h2>
-        <p>
-            Date of Birth: 18-03-2006<br>
-            Gender: female<br>
-            Nationality: Indian
-        </p>
-    </div>
-</div>
-
-</body>
-</html>
+        <button onclick="toggleProjects()">Show / Hide Projects</button>
+        <ul id="projects" class="hidden">
+            <li>Interactive Resume Website</li>
+            <li>Online Voting System</li>
