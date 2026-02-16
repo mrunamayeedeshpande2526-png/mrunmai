@@ -1,134 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Interactive Resume</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            transition: 0.3s;
-        }
+    <title>User Validation Form</title>
+    <script>
+        function validateForm() {
 
-        .container {
-            width: 800px;
-            margin: 20px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var mobile = document.getElementById("mobile").value;
 
-        h1, h2 {
-            color: #333;
-        }
+            // Username: Only letters, minimum 3 characters
+            var usernamePattern = /^[A-Za-z]{3,}$/;
 
-        .toggle-btn {
-            float: right;
-            padding: 8px 12px;
-            border: none;
-            cursor: pointer;
-            background: #333;
-            color: white;
-            border-radius: 5px;
-        }
+            // Password: Minimum 6 characters, at least 1 letter and 1 digit
+            var passwordPattern = /^(?=.*[A-Za-z])(?=.*[0-9]).{6,}$/;
 
-        .section {
-            margin-top: 20px;
-        }
+            // Mobile: Exactly 10 digits
+            var mobilePattern = /^[0-9]{10}$/;
 
-        .skill {
-            margin: 10px 0;
-        }
+            if (!usernamePattern.test(username)) {
+                alert("Invalid Username!\nUsername must contain only letters and minimum 3 characters.");
+                return false;
+            }
 
-        .skill-bar {
-            background: #ddd;
-            border-radius: 20px;
-            overflow: hidden;
-        }
+            if (!passwordPattern.test(password)) {
+                alert("Invalid Password!\nPassword must be at least 6 characters long and contain at least 1 letter and 1 digit.");
+                return false;
+            }
 
-        .skill-level {
-            height: 20px;
-            background: #4CAF50;
-            width: 0;
-            transition: 1s;
-        }
+            if (!mobilePattern.test(mobile)) {
+                alert("Invalid Mobile Number!\nMobile number must contain exactly 10 digits.");
+                return false;
+            }
 
-        button {
-            padding: 8px 12px;
-            border: none;
-            background: #4CAF50;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
+            alert("Form Submitted Successfully!");
+            return true;
         }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Dark Mode */
-        body.dark {
-            background: #121212;
-        }
-
-        body.dark .container {
-            background: #1e1e1e;
-            color: white;
-        }
-
-        body.dark h1, 
-        body.dark h2 {
-            color: #90caf9;
-        }
-    </style>
+    </script>
 </head>
+
 <body>
 
-<div class="container">
-    <button class="toggle-btn" onclick="toggleTheme()">Dark Mode</button>
+    <h2>User Registration Form</h2>
 
-    <h1>John Doe</h1>
-    <p>Email: john@example.com | Phone: 9876543210</p>
+    <form onsubmit="return validateForm()">
 
-    <div class="section">
-        <h2>Career Objective</h2>
-        <p>
-            Passionate web developer looking for opportunities to grow and
-            contribute to innovative projects.
-        </p>
-    </div>
+        <label>Username:</label>
+        <input type="text" id="username"><br><br>
 
-    <div class="section">
-        <h2>Skills</h2>
+        <label>Password:</label>
+        <input type="password" id="password"><br><br>
 
-        <div class="skill">
-            HTML
-            <div class="skill-bar">
-                <div class="skill-level" style="width:90%"></div>
-            </div>
-        </div>
+        <label>Mobile Number:</label>
+        <input type="text" id="mobile"><br><br>
 
-        <div class="skill">
-            CSS
-            <div class="skill-bar">
-                <div class="skill-level" style="width:80%"></div>
-            </div>
-        </div>
+        <input type="submit" value="Submit">
 
-        <div class="skill">
-            JavaScript
-            <div class="skill-bar">
-                <div class="skill-level" style="width:70%"></div>
-            </div>
-        </div>
-    </div>
+    </form>
 
-    <div class="section">
-        <h2>Projects</h2>
-        <button onclick="toggleProjects()">Show / Hide Projects</button>
-        <ul id="projects" class="hidden">
-            <li>Interactive Resume Website</li>
-            <li>Online Voting System</li>
+</body>
+</html>
