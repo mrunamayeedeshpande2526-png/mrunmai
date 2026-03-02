@@ -1,62 +1,34 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html>
 <head>
-    <title>User Validation Form</title>
-    <script>
-        function validateForm() {
-
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            var mobile = document.getElementById("mobile").value;
-
-            // Username: Only letters, minimum 3 characters
-            var usernamePattern = /^[A-Za-z]{3,}$/;
-
-            // Password: Minimum 6 characters, at least 1 letter and 1 digit
-            var passwordPattern = /^(?=.*[A-Za-z])(?=.*[0-9]).{6,}$/;
-
-            // Mobile: Exactly 10 digits
-            var mobilePattern = /^[0-9]{10}$/;
-
-            if (!usernamePattern.test(username)) {
-                alert("Invalid Username!\nUsername must contain only letters and minimum 3 characters.");
-                return false;
-            }
-
-            if (!passwordPattern.test(password)) {
-                alert("Invalid Password!\nPassword must be at least 6 characters long and contain at least 1 letter and 1 digit.");
-                return false;
-            }
-
-            if (!mobilePattern.test(mobile)) {
-                alert("Invalid Mobile Number!\nMobile number must contain exactly 10 digits.");
-                return false;
-            }
-
-            alert("Form Submitted Successfully!");
-            return true;
+    <title>Dynamic Update Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
         }
-    </script>
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-
 <body>
 
-    <h2>User Registration Form</h2>
+    <h2 id="text">Click the button to update me!</h2>
+    <button id="btn">Click Me</button>
 
-    <form onsubmit="return validateForm()">
+    <script>
+        const button = document.getElementById("btn");
+        const text = document.getElementById("text");
 
-        <label>Username:</label>
-        <input type="text" id="username"><br><br>
-
-        <label>Password:</label>
-        <input type="password" id="password"><br><br>
-
-        <label>Mobile Number:</label>
-        <input type="text" id="mobile"><br><br>
-
-        <input type="submit" value="Submit">
-
-    </form>
+        button.addEventListener("click", function() {
+            text.textContent = "Text Updated Successfully!";
+            text.style.color = "green";
+        });
+    </script>
 
 </body>
 </html>
