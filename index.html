@@ -1,33 +1,17 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Update Example</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 100px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Simple Dynamic Page</title>
 </head>
 <body>
 
-    <h2 id="text">Click the button to update me!</h2>
-    <button id="btn">Click Me</button>
+    <h3 id="output">Hello!</h3>
+    <button onclick="updateText()">Click Me</button>
 
     <script>
-        const button = document.getElementById("btn");
-        const text = document.getElementById("text");
-
-        button.addEventListener("click", function() {
-            text.textContent = "Text Updated Successfully!";
-            text.style.color = "green";
-        });
+        function updateText() {
+            document.getElementById("output").innerHTML = "Text Updated!";
+        }
     </script>
 
 </body>
