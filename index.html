@@ -4,34 +4,18 @@ session_start();
 $user = "admin";
 $pass = "12345";
 
-/* LOGIN */
 if(isset($_POST['login'])){
-    if($_POST['userid'] == $user && $_POST['password'] == $pass){
-        $_SESSION['user'] = $user;
+    $uid = $_POST['userid'];
+    $pwd = $_POST['password'];
+
+    if($uid == $user && $pwd == $pass){
+        $_SESSION['user'] = $uid;
+        echo "Login Successful<br><br>";
+        echo "<a href='logout.php'>Logout</a>";
     } else {
-        echo "Invalid Login<br>";
+        echo "Invalid User ID or Password<br><br>";
     }
 }
-
-/* LOGOUT */
-if(isset($_POST['logout'])){
-    session_destroy();
-}
-?>
-
-<?php
-if(isset($_SESSION['user'])){
-?>
-
-Welcome <?php echo $_SESSION['user']; ?>
-<br><br>
-
-<form method="post">
-<input type="submit" name="logout" value="Logout">
-</form>
-
-<?php
-}else{
 ?>
 
 <form method="post">
@@ -39,7 +23,3 @@ User ID: <input type="text" name="userid"><br><br>
 Password: <input type="password" name="password"><br><br>
 <input type="submit" name="login" value="Login">
 </form>
-
-<?php
-}
-?>
