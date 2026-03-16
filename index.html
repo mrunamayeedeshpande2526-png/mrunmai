@@ -1,61 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AJAX Suggestion Example</title>
+<?php
+session_start();
 
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+$valid_user = "admin";
+$valid_pass = "12345";
 
-    <style>
-        body { font-family: Arial; margin: 50px; }
-        #suggestions {
-            border: 1px solid #ccc;
-            width: 200px;
-            display: none;
-        }
-        .item {
-            padding: 5px;
-            cursor: pointer;
-        }
-        .item:hover {
-            background-color: #f0f0f0;
-        }
-    </style>
-</head>
-<body>
+/* Logout */
+if(isset($_GET['logout'])){
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
 
-    <h3>Search:</h3>
-    <input type="text" id="search" autocomplete="off">
-    <div id="suggestions"></div>
+/* Login */
+if(isset($_POST['login'])){
+    $userid = $_POST['userid'];
+    $password = $_POST['password'];
 
-    <script>
-        $(document).ready(function() {
+    if($userid == $valid_user && $password == $valid_pass){
+        $_SESSION['user'] = $userid;
+    } else {
+        echo "Invalid User ID or Password<br><br>";
+    }
+}
+?>
 
-            $("#search").keyup(function() {
-                let query = $(this).val();
+<?php if(isset($_SESSION['user'])) { ?>
 
-                if (query !== "") {
-                    $.ajax({
-                        url: "suggest.php",   // backend file
-                        method: "POST",
-                        data: { search: query },
-                        success: function(data) {
-                            $("#suggestions").html(data).show();
-                        }
-                    });
-                } else {
-                    $("#suggestions").hide();
-                }
-            });
+Welcome <?php echo $_SESSION['user']; ?>
+<br><br>
+<a href="login.php?logout=true">Logout</a>
 
-            // Click suggestion
-            $(document).on("click", ".item", function() {
-                $("#search").val($(this).text());
-                $("#suggestions").hide();
-            });
+<?php } else { ?>
 
-        });
-    </script>
+<form method="post">
+User ID: <input type="text" name="userid"><br><br>
+Password: <input type="password" name="password"><br><br>
+<input type="submit" name="login" value="Login">
+</form>
 
-</body>
-</html>
+<?php } ?>
