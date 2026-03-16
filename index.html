@@ -1,49 +1,38 @@
 <?php
 session_start();
 
-$valid_user = "admin";
-$valid_pass = "12345";
-$time = 600; // 10 minutes
+$user = "admin";
+$pass = "12345";
 
-// logout
-if(isset($_GET['logout'])){
-    session_destroy();
-    setcookie("user","",time()-3600);
-    header("Location: login.php");
-    exit();
-}
-
-// login
+/* LOGIN */
 if(isset($_POST['login'])){
-    $userid = $_POST['userid'];
-    $password = $_POST['password'];
-
-    if($userid == $valid_user && $password == $valid_pass){
-        $_SESSION['user'] = $userid;
-        $_SESSION['time'] = time();
-        setcookie("user",$userid,time()+$time); // cookie for 10 min
+    if($_POST['userid'] == $user && $_POST['password'] == $pass){
+        $_SESSION['user'] = $user;
     } else {
-        echo "Invalid Login<br><br>";
+        echo "Invalid Login<br>";
     }
 }
 
-// session timeout check
-if(isset($_SESSION['time'])){
-    if(time() - $_SESSION['time'] > $time){
-        session_destroy();
-        setcookie("user","",time()-3600);
-        echo "Session expired. Login again.<br><br>";
-    }
+/* LOGOUT */
+if(isset($_POST['logout'])){
+    session_destroy();
 }
 ?>
 
-<?php if(isset($_SESSION['user'])) { ?>
+<?php
+if(isset($_SESSION['user'])){
+?>
 
-//Welcome <?php echo $_SESSION['user']; ?>
+Welcome <?php echo $_SESSION['user']; ?>
 <br><br>
-<a href="login.php?logout=true">Logout</a>
 
-<?php } else { ?>
+<form method="post">
+<input type="submit" name="logout" value="Logout">
+</form>
+
+<?php
+}else{
+?>
 
 <form method="post">
 User ID: <input type="text" name="userid"><br><br>
@@ -51,4 +40,6 @@ Password: <input type="password" name="password"><br><br>
 <input type="submit" name="login" value="Login">
 </form>
 
-<?php } ?>
+<?php
+}
+?>
